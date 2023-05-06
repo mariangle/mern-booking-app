@@ -70,6 +70,10 @@ app.post("/login", async (req, res) => {
       res.json(null);
     }
   });
+
+  app.post("/logout", (req, res) => {
+    res.cookie("token", "").json(true);
+  })
   
 
 app.listen(4000);
