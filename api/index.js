@@ -9,9 +9,11 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "vcxnmcvneficxmkc29ea9328dm"
+const download = require("image-downloader")
 
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(__dirname+"/uploads"))
 app.use(cors({
     credentials: true,
     origin: "http://localhost:5173",
@@ -74,6 +76,24 @@ app.post("/login", async (req, res) => {
   app.post("/logout", (req, res) => {
     res.cookie("token", "").json(true);
   })
+
+  app.post("/upload-by-url", async (req, res) => {
+    const { link } = req.body;
+    if (!link) {
+      res.status(400).json("The link parameter is required");
+      return;
+    }
+    const newName = "photo" + Date.now() + ".jpg";
+    try {
+      await download.image({
+        url: link,
+        dest: __dirname + "/uploads/" + newName,
+      });
+      res.json(newName);
+    } catch (error) {
+      res.status(500).json(error.message);
+    }
+  });
   
 
 app.listen(4000);
