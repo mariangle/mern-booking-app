@@ -36,20 +36,20 @@ export default function BookingWidget({listing}){
 
     return (
         <div className="bg-white shadow p-4 rounded-2xl">
-            <div className="text-2xl text-center">
-                Price: DKK {listing.price} / per night
+            <div className="text-2xl">
+                <span className="font-semibold">{listing.price} DKK</span> nat
             </div>
             <div className="border rounded-2xl mt-4">
                 <div className="flex">
                     <div className="py-3 px-4">
-                        <label>Check in:</label>
+                        <label>INDTJEKNING</label>
                         <input type="date"
                             value={checkIn}
                             onChange={e => setCheckIn(e.target.value)}
                             />
                     </div>
                     <div className="py-3 px-4 border-l">
-                        <label>Check out:</label>
+                        <label>UDTJEKNING</label>
                         <input type="date" 
                             value={checkOut}
                             onChange={e => setCheckOut(e.target.value)}
@@ -57,7 +57,7 @@ export default function BookingWidget({listing}){
                     </div>
                 </div>
                 <div className="py-3 px-4 border-t">
-                <label>Number of guests:</label>
+                <label>GÆSTER</label>
                 <input type="number"
                         value={numberOfGuests}
                         onChange={e => setNumbeOfGuests(e.target.value)}
@@ -65,12 +65,12 @@ export default function BookingWidget({listing}){
                 </div>
                 {numberOfNights > 0 && (
                     <div className="py-3 px-4 border-t">
-                        <label>Your full name:</label>
+                        <label>FULDE NAVN</label>
                         <input type="text"
                             value={name}
                             onChange={e => setName(e.target.value)}                        
                             />
-                        <label>Phone number:</label>
+                        <label>TELEFONNUMMER</label>
                         <input type="tel"
                             value={phone}
                             onChange={e => setPhone(e.target.value)}
@@ -79,11 +79,14 @@ export default function BookingWidget({listing}){
                 ) }
             </div>
             <button onClick={handleBook} className="primary mt-4">
-                Book this place
-                {checkIn && checkOut && (
-                    <span> DKK {numberOfNights * listing.price}</span>
-                )}
+                Reserver
             </button>
+            {checkIn && checkOut && (
+                <div className="flex justify-between my-2">
+                    <p className="underline">{listing.price} DKK x {numberOfNights} {numberOfNights > 1 ? "nætter" : "nat"}</p>
+                    <p>{numberOfNights * listing.price} DKK</p>
+                </div>
+                )}
         </div>
     )
 }

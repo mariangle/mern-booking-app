@@ -21,7 +21,7 @@ export default function IndexPage(){
                     <h3 className="font-bold">{listing.title}</h3>
                     <h2 className="text-sm truncate text-gray-500">{listing.address}</h2>
                     <div className="mt-1">
-                        <span className="font-bold">{listing.price} DKK</span> per night
+                        <span className="font-bold">{listing.price} DKK</span> per  nat
                     </div>
                 </Link>
             ))}

@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .max-w-small {
+    max-width: 10rem;
+  }
+}
 
 input[type="text"],
 input[type="password"],

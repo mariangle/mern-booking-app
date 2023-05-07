@@ -2,8 +2,10 @@ import { Link, Navigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import axios from "axios";
 import { UserContext } from "../UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage(){
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {setUser} = useContext(UserContext)
@@ -17,6 +19,7 @@ export default function LoginPage(){
           });
           alert("Login successful");
           setUser(data);
+          navigate("/")
         } catch (error) {
           if (error.response && error.response.status === 401) {
             alert("Invalid email or password");
