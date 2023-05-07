@@ -145,4 +145,28 @@ app.post("/login", async (req, res) => {
     res.json(await Listing.findById(id))
   })
 
+  app.put("/listings", async (req, res) => {
+    const { token } = req.cookies;
+    const { 
+      id, title, address, images, description,
+      perks, extraInfo, checkIn, checkOut, maxGuests
+    } = req.body;
+    console.log({ 
+      id, title, address, images, description,
+      perks, extraInfo, checkIn, checkOut, maxGuests
+    })
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      const listingDoc = await Listing.findById(id);
+      if (userData.id === listingDoc.owner.toString()){
+        listingDoc.set({
+          title, address, images, description,
+          perks, extraInfo, checkIn, checkOut, maxGuests
+        })
+        await listingDoc.save();
+        res.json("ok")
+      }
+    })
+  })
+
 app.listen(4000);

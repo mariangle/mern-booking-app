@@ -30,19 +30,29 @@ export default function ListingFormPage(){
             setImages(data.images);
             setDescription(data.description);
             setPerks(data.perks);
-            setExtraInfo(data.setExtraInfo);
-            setCheckIn(data.setCheckIn);
+            setExtraInfo(data.extraInfo);
+            setCheckIn(data.checkIn);
+            setCheckOut(data.checkOut);
             setMaxGuests(data.maxGuests);
         })
     }, [id])
 
     function handleSaveListing(e){
         e.preventDefault();
-        axios.post("/listings", { 
+        const listingData = {
             title, address, images, description, 
-            perks, extraInfo, checkIn, checkOut, maxGuests 
-        })
+                perks, extraInfo, checkIn, checkOut, maxGuests 
+        }
+        if (id){
+            axios.put("/listings", { 
+                id, ...listingData
+            })
+        } else {
+            axios.post("/listings", listingData)
+        }
         navigate("/account/listings")
+        console.log(listingData)
+
     }
 
     return (
@@ -64,11 +74,11 @@ export default function ListingFormPage(){
                         <div className="grid gap-2 sm:grid-cols-3">
                             <div>
                                 <label htmlFor="">Check in time</label>
-                                <input type="number" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} placeholder="14:00"/>
+                                <input type="time" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} placeholder="14:00"/>
                             </div>
                             <div>
                                 <label htmlFor="">Check out time</label>
-                                <input type="number" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} placeholder="11"/>
+                                <input type="time" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} placeholder="11"/>
                             </div>
                             <div>
                                 <label htmlFor="">Max guests</label>

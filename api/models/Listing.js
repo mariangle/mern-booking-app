@@ -9,8 +9,8 @@ const listingSchema = new Schema({
     description: String,
     perks: [String],
     extraInfo: String, 
-    checkIn: Number,
-    checkOut: Number,
+    checkIn: String,
+    checkOut: String,
     maxGuests: Number,
 })
 

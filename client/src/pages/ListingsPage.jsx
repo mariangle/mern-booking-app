@@ -26,9 +26,9 @@ export default function ListingsPage(){
                 <div className="mt-4">
                     {listings.length > 0 && listings.map(listing => (
                         <Link to={"/account/listings/" + listing._id} key={listing} className="cursor-pointer flex gap-4 bg-gray-100 p-4 rounded-2xl">
-                            <div className="w-32 h-32 bg-gray-300 grow-0 shrink">
+                            <div className="flex w-32 h-32 bg-gray-300 grow-0 shrink">
                                 {listing.images.length > 0 && (
-                                    <img src={listing.images[0]} alt="" />
+                                    <img className="object-cover w-full h-full" src={"http://localhost:4000/uploads/" + listing.images[0]} alt="" />
                                 )}
                             </div>
                             <div className="grow shrink-0">
