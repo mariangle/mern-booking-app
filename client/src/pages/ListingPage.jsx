@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-import BookingWidget from "../BookingWidget";
-import ListingGallery from "../ListingGallery";
-import AddressLink from "../AddressLink";
+import BookingWidget from "../components/BookingWidget";
+import ListingGallery from "../components/ListingGallery";
+import AddressLink from "../components/AddressLink";
 
 export default function ListingPage(){
     const { id } = useParams();

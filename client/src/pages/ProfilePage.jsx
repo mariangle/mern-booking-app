@@ -3,7 +3,7 @@ import { UserContext } from "../UserContext"
 import { Navigate, Link, useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import ListingsPage from "./ListingsPage"
-import AccountNav from "../AccountNav";
+import AccountNav from "../components/AccountNav";
 
 
 export default function ProfilePage(){

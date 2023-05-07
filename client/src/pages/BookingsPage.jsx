@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import AccountNav from "../AccountNav"
+import AccountNav from "../components/AccountNav"
 import axios from "axios";
 import { Link } from "react-router-dom";
-import ListingImg from "../ListingImg"
 import { differenceInCalendarDays } from "date-fns"
-import BookingDates from "../BookingDates";
+import BookingDates from "../components/BookingDates";
+import ListingImg from "../components/ListingImg";
 
 
 export default function BookingsPage(){

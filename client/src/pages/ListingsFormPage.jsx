@@ -1,9 +1,9 @@
 import Perks from "../Perks";
-import ImageUploader from "../ImageUploader";
+import ImageUploader from "../components/ImageUploader";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import AccountNav from "../AccountNav";
+import AccountNav from "../components/AccountNav";
 
 
 export default function ListingFormPage(){
