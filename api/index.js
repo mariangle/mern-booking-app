@@ -117,11 +117,18 @@ app.post("/login", async (req, res) => {
 
   app.post("/listings", (req, res) => {
     const { token } = req.cookies;
+    const { 
+      title, address, images, description,
+      perks, extraInfo, checkIn, checkOut, maxGuests
+    } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      Listing.create({
+      const listingDoc = await Listing.create({
         owner: userData.id,
-      })
+        title, address, images, description,
+        perks, extraInfo, checkIn, checkOut, maxGuests
+      });
+      res.json(listingDoc)
     });
   })
     
