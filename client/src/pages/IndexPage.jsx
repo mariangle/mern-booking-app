@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 
 export default function IndexPage(){
     const [ listings, setListings] = useState([]);
@@ -11,7 +12,7 @@ export default function IndexPage(){
     return (
         <div className="grid gap-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8">
             {listings.length > 0 && listings.map(listing => (
-                <div>
+                <Link to={"/listing/"+listing._id}>
                     <div className="bg-gray-500 mb-2 rounded-2xl flex">
                         {listing.images?.[0] && (
                             <img className="rounded-2xl object-cover aspect-square" src={"http://localhost:4000/uploads/" + listing.images?.[0]} alt="" />
@@ -22,7 +23,7 @@ export default function IndexPage(){
                     <div className="mt-1">
                         <span className="font-bold">${listing.price}</span> per night
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     )

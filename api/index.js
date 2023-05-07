@@ -142,7 +142,6 @@ app.post("/login", async (req, res) => {
     
   app.get("/listings/:id", async (req, res) => {
     const { id } = req.params;
-    console.log("id", id)
     res.json(await Listing.findById(id))
   })
 
@@ -152,10 +151,6 @@ app.post("/login", async (req, res) => {
       id, title, address, images, description,
       perks, extraInfo, checkIn, checkOut, maxGuests, price
     } = req.body;
-    console.log({ 
-      id, title, address, images, description,
-      perks, extraInfo, checkIn, checkOut, maxGuests, price
-    })
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
       const listingDoc = await Listing.findById(id);
@@ -173,4 +168,7 @@ app.post("/login", async (req, res) => {
   app.get("/listings", async (req, res) => {
     res.json( await Listing.find());
   })
+
+
+  
 app.listen(4000);
