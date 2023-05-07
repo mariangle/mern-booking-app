@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const User = require("./models/User.js");
+const Listing = require("./models/Listing.js")
 require("dotenv").config();
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -113,6 +114,16 @@ app.post("/login", async (req, res) => {
     const uploadedFiles = req.files.map(file => file.filename);
     res.json(uploadedFiles);
   });
+
+  app.post("/listings", (req, res) => {
+    const { token } = req.cookies;
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      Listing.create({
+        owner: userData.id,
+      })
+    });
+  })
     
 
 app.listen(4000);
