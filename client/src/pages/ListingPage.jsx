@@ -30,9 +30,9 @@ export default function ListingPage(){
                     close
                 </button>
             </div>
-            {listing?.images?.length > 0 && listing.images.map((image) => {
+            {listing?.images?.length > 0 && listing.images.map((image, index) => {
               return (
-                <div key={image}>
+                <div key={index}>
                   <img className="w-full object-cover" src={"http://localhost:4000/uploads/" + image} alt="" />
                 </div>
               );

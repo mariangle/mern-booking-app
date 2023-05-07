@@ -24,6 +24,15 @@ app.use(cors({
 
 mongoose.connect(process.env.MONGO_URL);
 
+function getUserDataFromReq(req) {
+  return new Promise((resolve, reject) =>{
+    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData)
+    })
+  })
+}
+
 app.get("/register", (req, res) => {
     res.json("test ok");
 })
@@ -142,7 +151,7 @@ app.post("/login", async (req, res) => {
     
   app.get("/listings/:id", async (req, res) => {
     const { id } = req.params;
-    res.json(await Listing.findById(id))
+    res.json(await Listing.findById(id).populate("owner"))
   })
 
   app.put("/listings", async (req, res) => {
@@ -169,14 +178,15 @@ app.post("/login", async (req, res) => {
     res.json( await Listing.find());
   })
 
-  app.post("/bookings", (req, res) => {
+  app.post("/bookings", async (req, res) => {
+    const userData = await getUserDataFromReq(req)
     const { 
       listing, checkIn, checkOut, 
       numberOfGuests, name, phone, price
     } = req.body;
     Booking.create({ 
       listing, checkIn, checkOut, 
-      numberOfGuests, name, phone, price
+      numberOfGuests, name, phone, price, user:userData.id
     })
     .then((doc) => {
       res.json(doc);
@@ -186,6 +196,11 @@ app.post("/login", async (req, res) => {
       res.status(500).json({ error: "An error occurred during booking creation" });
     });
   });
+
+  app.get("/bookings", async (req, res) => {
+    const userData = await getUserDataFromReq(req);
+    res.json( await Booking.find({user:userData.id}).populate("listing"))
+  })
 
   
 app.listen(4000);

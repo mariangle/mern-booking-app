@@ -3,6 +3,7 @@ import AccountNav from "../AccountNav";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import ListingImg from "../ListingImg"
 
 export default function ListingsPage(){
     const [listings, setListings] = useState([]);
@@ -27,9 +28,7 @@ export default function ListingsPage(){
                     {listings.length > 0 && listings.map(listing => (
                         <Link to={"/account/listings/" + listing._id} key={listing} className="cursor-pointer flex gap-4 bg-gray-100 p-4 rounded-2xl">
                             <div className="flex w-32 h-32 bg-gray-300 grow-0 shrink">
-                                {listing.images.length > 0 && (
-                                    <img className="object-cover w-full h-full" src={"http://localhost:4000/uploads/" + listing.images[0]} alt="" />
-                                )}
+                                <ListingImg listing={listing} />
                             </div>
                             <div className="grow shrink-0">
                                 <h2 className="text-xl">{listing.title}</h2>
