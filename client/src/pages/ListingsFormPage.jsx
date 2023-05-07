@@ -1,12 +1,13 @@
 import Perks from "../Perks";
 import ImageUploader from "../ImageUploader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AccountNav from "../AccountNav";
 
 
 export default function ListingFormPage(){
+    const {id} = useParams();
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [address, setAddress] = useState("");
@@ -18,7 +19,24 @@ export default function ListingFormPage(){
     const [checkOut, setCheckOut] = useState("");
     const [maxGuests, setMaxGuests] = useState(1);
 
-    function addNewListing(e){
+    useEffect(() => {
+        if (!id){
+            return;
+        }
+        axios.get("/listings/"+id).then(response => {
+            const { data } = response;
+            setTitle(data.title);
+            setAddress(data.address);
+            setImages(data.images);
+            setDescription(data.description);
+            setPerks(data.perks);
+            setExtraInfo(data.setExtraInfo);
+            setCheckIn(data.setCheckIn);
+            setMaxGuests(data.maxGuests);
+        })
+    }, [id])
+
+    function handleSaveListing(e){
         e.preventDefault();
         axios.post("/listings", { 
             title, address, images, description, 
@@ -30,7 +48,7 @@ export default function ListingFormPage(){
     return (
                 <div>
                     <AccountNav />
-                    <form onSubmit={addNewListing}>
+                    <form onSubmit={handleSaveListing}>
                         <label>Title</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title"/>
                         <label>Address</label>

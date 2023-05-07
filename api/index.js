@@ -131,6 +131,18 @@ app.post("/login", async (req, res) => {
       res.json(listingDoc)
     });
   })
+
+  app.get("/listings", (req, res) => {
+    const { token } = req.cookies;
+    jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+      const { id } = userData;
+      res.json( await Listing.find({owner:id}));
+    })
+  })
     
+  app.get("/listings/:id", async (req, res) => {
+    const { id } = req.params;
+    res.json(await Listing.findById(id))
+  })
 
 app.listen(4000);

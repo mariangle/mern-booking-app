@@ -6,7 +6,7 @@ import ListingsPage from "./ListingsPage"
 import AccountNav from "../AccountNav";
 
 
-export default function AccountPage(){
+export default function ProfilePage(){
     let {subpage} = useParams();
     const navigate = useNavigate();
     const { ready, user, setUser } = useContext(UserContext);
