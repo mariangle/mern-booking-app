@@ -119,20 +119,20 @@ app.post("/login", async (req, res) => {
     const { token } = req.cookies;
     const { 
       title, address, images, description,
-      perks, extraInfo, checkIn, checkOut, maxGuests
+      perks, extraInfo, checkIn, checkOut, maxGuests, price
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
       const listingDoc = await Listing.create({
         owner: userData.id,
         title, address, images, description,
-        perks, extraInfo, checkIn, checkOut, maxGuests
+        perks, extraInfo, checkIn, checkOut, maxGuests, price
       });
       res.json(listingDoc)
     });
   })
 
-  app.get("/listings", (req, res) => {
+  app.get("/user-listings", (req, res) => {
     const { token } = req.cookies;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       const { id } = userData;
@@ -142,6 +142,7 @@ app.post("/login", async (req, res) => {
     
   app.get("/listings/:id", async (req, res) => {
     const { id } = req.params;
+    console.log("id", id)
     res.json(await Listing.findById(id))
   })
 
@@ -149,11 +150,11 @@ app.post("/login", async (req, res) => {
     const { token } = req.cookies;
     const { 
       id, title, address, images, description,
-      perks, extraInfo, checkIn, checkOut, maxGuests
+      perks, extraInfo, checkIn, checkOut, maxGuests, price
     } = req.body;
     console.log({ 
       id, title, address, images, description,
-      perks, extraInfo, checkIn, checkOut, maxGuests
+      perks, extraInfo, checkIn, checkOut, maxGuests, price
     })
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
@@ -161,7 +162,7 @@ app.post("/login", async (req, res) => {
       if (userData.id === listingDoc.owner.toString()){
         listingDoc.set({
           title, address, images, description,
-          perks, extraInfo, checkIn, checkOut, maxGuests
+          perks, extraInfo, checkIn, checkOut, maxGuests, price
         })
         await listingDoc.save();
         res.json("ok")
@@ -169,4 +170,7 @@ app.post("/login", async (req, res) => {
     })
   })
 
+  app.get("/listings", async (req, res) => {
+    res.json( await Listing.find());
+  })
 app.listen(4000);

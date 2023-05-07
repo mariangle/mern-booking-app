@@ -18,42 +18,48 @@ export default function ListingFormPage(){
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
     const [maxGuests, setMaxGuests] = useState(1);
+    const [price, setPrice] = useState(100);
 
     useEffect(() => {
-        if (!id){
-            return;
-        }
-        axios.get("/listings/"+id).then(response => {
-            const { data } = response;
-            setTitle(data.title);
-            setAddress(data.address);
-            setImages(data.images);
-            setDescription(data.description);
-            setPerks(data.perks);
-            setExtraInfo(data.extraInfo);
-            setCheckIn(data.checkIn);
-            setCheckOut(data.checkOut);
-            setMaxGuests(data.maxGuests);
-        })
-    }, [id])
+      if (!id) {
+        return;
+      }
 
-    function handleSaveListing(e){
+      axios.get("/listings/" + id)
+        .then(response => {
+          const { data } = response;
+          setTitle(data.title);
+          setAddress(data.address);
+          setImages(data.images);
+          setDescription(data.description);
+          setPerks(data.perks);
+          setExtraInfo(data.extraInfo);
+          setCheckIn(data.checkIn);
+          setCheckOut(data.checkOut);
+          setMaxGuests(data.maxGuests);
+          setPrice(data.price);
+        })
+        }, [id]);
+
+    async function handleSaveListing(e) {
         e.preventDefault();
         const listingData = {
-            title, address, images, description, 
-                perks, extraInfo, checkIn, checkOut, maxGuests 
+          title, address, images,description,perks,
+            extraInfo, checkIn, checkOut, maxGuests, price
+        };
+      
+        try {
+          if (id) {
+            await axios.put("/listings", { id, ...listingData });
+          } else {
+            await axios.post("/listings", listingData);
+          }
+      
+          navigate("/account/listings");
+        } catch (error) {
+          console.error(error);
         }
-        if (id){
-            axios.put("/listings", { 
-                id, ...listingData
-            })
-        } else {
-            axios.post("/listings", listingData)
-        }
-        navigate("/account/listings")
-        console.log(listingData)
-
-    }
+      }
 
     return (
                 <div>
@@ -71,7 +77,7 @@ export default function ListingFormPage(){
                         <Perks selected={perks} onChange={setPerks}></Perks>
                         <label htmlFor="">Extra Info</label>
                         <textarea value={extraInfo} onChange={(e) => setExtraInfo(e.target.value)}/>
-                        <div className="grid gap-2 sm:grid-cols-3">
+                        <div className="grid gap-2 grid-cols-2 md-grid-cols-4">
                             <div>
                                 <label htmlFor="">Check in time</label>
                                 <input type="time" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} placeholder="14:00"/>
@@ -83,6 +89,10 @@ export default function ListingFormPage(){
                             <div>
                                 <label htmlFor="">Max guests</label>
                                 <input type="number" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)}/>
+                            </div>
+                            <div>
+                                <label htmlFor="">Price pr. Night</label>
+                                <input type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
                             </div>
                         </div>
                         <button className="primary my-4">Save</button>

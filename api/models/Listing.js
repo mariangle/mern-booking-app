@@ -12,6 +12,7 @@ const listingSchema = new Schema({
     checkIn: String,
     checkOut: String,
     maxGuests: Number,
+    price: Number
 })
 
 const ListingModel = mongoose.model("Listing", listingSchema);
