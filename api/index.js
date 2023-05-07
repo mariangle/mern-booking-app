@@ -10,6 +10,8 @@ const cookieParser = require("cookie-parser");
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "vcxnmcvneficxmkc29ea9328dm"
 const download = require("image-downloader")
+const multer = require("multer")
+const fs = require("fs")
 
 app.use(express.json());
 app.use(cookieParser());
@@ -94,6 +96,23 @@ app.post("/login", async (req, res) => {
       res.status(500).json(error.message);
     }
   });
+
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
   
+  const upload = multer({ storage: storage });
+  
+  app.post('/upload', upload.array('images', 100), (req, res) => {
+    const uploadedFiles = req.files.map(file => file.filename);
+    res.json(uploadedFiles);
+  });
+    
 
 app.listen(4000);

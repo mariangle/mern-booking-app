@@ -5,7 +5,7 @@ const listingSchema = new Schema({
     owner: { type:Schema.Types.ObjectId, ref: "User" },
     title: String,
     address: String,
-    photos: [String],
+    images: [String],
     description: String,
     perks: [String],
     extraInfo: String, 
