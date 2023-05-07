@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const User = require("./models/User.js");
 const Listing = require("./models/Listing.js")
+const Booking = require("./models/Booking.js")
 require("dotenv").config();
 const app = express();
 const cookieParser = require("cookie-parser");
@@ -12,7 +13,6 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = "vcxnmcvneficxmkc29ea9328dm"
 const download = require("image-downloader")
 const multer = require("multer")
-const fs = require("fs")
 
 app.use(express.json());
 app.use(cookieParser());
@@ -169,6 +169,23 @@ app.post("/login", async (req, res) => {
     res.json( await Listing.find());
   })
 
+  app.post("/bookings", (req, res) => {
+    const { 
+      listing, checkIn, checkOut, 
+      numberOfGuests, name, phone, price
+    } = req.body;
+    Booking.create({ 
+      listing, checkIn, checkOut, 
+      numberOfGuests, name, phone, price
+    })
+    .then((doc) => {
+      res.json(doc);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "An error occurred during booking creation" });
+    });
+  });
 
   
 app.listen(4000);
