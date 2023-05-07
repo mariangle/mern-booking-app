@@ -37,7 +37,7 @@ export default function BookingWidget({listing}){
     return (
         <div className="bg-white shadow p-4 rounded-2xl">
             <div className="text-2xl text-center">
-                Price: ${listing.price} / per night
+                Price: DKK {listing.price} / per night
             </div>
             <div className="border rounded-2xl mt-4">
                 <div className="flex">
@@ -81,7 +81,7 @@ export default function BookingWidget({listing}){
             <button onClick={handleBook} className="primary mt-4">
                 Book this place
                 {checkIn && checkOut && (
-                    <span> ${numberOfNights * listing.price}</span>
+                    <span> DKK {numberOfNights * listing.price}</span>
                 )}
             </button>
         </div>

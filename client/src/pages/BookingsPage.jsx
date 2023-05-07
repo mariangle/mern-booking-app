@@ -30,7 +30,7 @@ export default function BookingsPage(){
                             <BookingDates booking={booking} className="mb-2 mt-4 text-gray-500" ></BookingDates>
                             <div className="text-xl">
                                 {differenceInCalendarDays(new Date(booking.checkOut), new Date(booking.checkIn))} Nights
-                                | Total: ${booking.price}
+                                | Total: DKK {booking.price}
                             </div>
                         </div>
                     </Link>

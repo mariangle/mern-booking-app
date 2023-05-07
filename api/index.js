@@ -25,17 +25,13 @@ app.use(cors({
 mongoose.connect(process.env.MONGO_URL);
 
 function getUserDataFromReq(req) {
-  return new Promise((resolve, reject) =>{
+  return new Promise((resolve, reject) => {
     jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
-      resolve(userData)
-    })
-  })
+      resolve(userData);
+    });
+  });
 }
-
-app.get("/register", (req, res) => {
-    res.json("test ok");
-})
 
 app.post("/register", async (req, res) => {
     const {name, email, password } = req.body;
@@ -52,26 +48,26 @@ app.post("/register", async (req, res) => {
 })
 
 app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    const userDoc = await User.findOne({ email });
-    if (userDoc) {
-      const passOk = bcrypt.compareSync(password, userDoc.password);
-      if (passOk) {
-        jwt.sign({ 
-          email: userDoc.email, 
-          id: userDoc._id
-        }, jwtSecret, {}, (err, token) => {
-          if (err) throw err;
-          res.cookie("token", token).json(userDoc);
-        });
-      } else {
-        res.status(422).json("pass not ok");
-      }
+  const { email, password } = req.body;
+  const userDoc = await User.findOne({ email });
+  if (userDoc) {
+    const passOk = bcrypt.compareSync(password, userDoc.password);
+    if (passOk) {
+      jwt.sign({ 
+        email: userDoc.email, 
+        id: userDoc._id
+      }, jwtSecret, {}, (err, token) => {
+        if (err) throw err;
+        res.cookie("token", token).json(userDoc);
+      });
     } else {
-      res.json("Not found");
+      res.status(401).json({ error: "Invalid email or password" });
     }
-  });
-  
+  } else {
+    res.status(401).json({ error: "Invalid email or password" });
+  }
+});
+
   app.get("/profile", (req, res) => {
     const { token } = req.cookies;
     if (token) {

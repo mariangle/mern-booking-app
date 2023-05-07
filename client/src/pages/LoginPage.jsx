@@ -6,26 +6,25 @@ import { UserContext } from "../UserContext";
 export default function LoginPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [redirect, setRedirect] = useState(false);
     const {setUser} = useContext(UserContext)
 
     async function loginUser(e){
         e.preventDefault();
         try {
-            const { data } = await axios.post("/login", {
-                email, 
-                password
-            })
-            alert("Login succesful")
-            setRedirect(true);
-            setUser(data)
-        } catch {
-            alert("Login failed")
-        }}
-
-    if (redirect) {
-        return <Navigate to="/" />
-    }
+          const { data } = await axios.post("/login", {
+            email, 
+            password
+          });
+          alert("Login successful");
+          setUser(data);
+        } catch (error) {
+          if (error.response && error.response.status === 401) {
+            alert("Invalid email or password");
+          } else {
+            alert("Login failed");
+          }
+        }
+      }
 
     return (
         <div className="mt-4 grow flex items-center justify-around">

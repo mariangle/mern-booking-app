@@ -6,7 +6,7 @@ export default function IndexPage(){
     const [ listings, setListings] = useState([]);
     useEffect(() => {
         axios.get("/listings").then(response => {
-            setListings([...response.data, ...response.data, ...response.data, ...response.data]);
+            setListings(response.data);
         })
     }, [])
     return (
@@ -18,10 +18,10 @@ export default function IndexPage(){
                             <img className="rounded-2xl object-cover aspect-square" src={"http://localhost:4000/uploads/" + listing.images?.[0]} alt="" />
                         )}
                     </div>
-                    <h2 className="font-bold">{listing.address}</h2>
-                    <h3 className="text-sm truncate text-gray-500">{listing.title}</h3>
+                    <h3 className="font-bold">{listing.title}</h3>
+                    <h2 className="text-sm truncate text-gray-500">{listing.address}</h2>
                     <div className="mt-1">
-                        <span className="font-bold">${listing.price}</span> per night
+                        <span className="font-bold">{listing.price} DKK</span> per night
                     </div>
                 </Link>
             ))}

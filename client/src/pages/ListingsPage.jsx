@@ -8,7 +8,7 @@ import ListingImg from "../components/ListingImg"
 export default function ListingsPage(){
     const [listings, setListings] = useState([]);
     useEffect(() => {
-        axios.get("/listings").then(({data}) => {
+        axios.get("/user-listings").then(({data}) => {
             setListings(data)
         })
     }, [])
@@ -25,17 +25,17 @@ export default function ListingsPage(){
                     </Link>
                 </div>
                 <div className="mt-4">
-                    {listings.length > 0 && listings.map(listing => (
-                        <Link to={"/account/listings/" + listing._id} key={listing} className="cursor-pointer flex gap-4 bg-gray-100 p-4 rounded-2xl">
-                            <div className="flex w-32 h-32 bg-gray-300 grow-0 shrink">
-                                <ListingImg listing={listing} />
-                            </div>
-                            <div className="grow shrink-0">
-                                <h2 className="text-xl">{listing.title}</h2>
-                                <p className="text-sm mt-2">{listing.description}</p>
-                            </div>
-                        </Link>
-                    ))}
+                {listings.length > 0 && listings.map((listing) => (
+                <Link to={"/account/listings/" + listing._id} key={listing._id} className="cursor-pointer flex gap-4 bg-gray-100 p-4 rounded-2xl">
+                    <div className="bg-gray-300 aspect-square flex max-w-4xs">
+                        <ListingImg listing={listing} />
+                    </div>
+                    <div className="flex flex-col">
+                        <h2 className="text-xl">{listing.title}</h2>
+                        <p className="text-sm mt-2 overflow-hidden overflow-ellipsis">{listing.description}</p>
+                    </div>
+                </Link>
+                ))}
                 </div>
         </div>
     )
