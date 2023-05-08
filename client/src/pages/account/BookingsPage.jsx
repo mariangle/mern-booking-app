@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
-import AccountNav from "../components/AccountNav"
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { differenceInCalendarDays } from "date-fns"
-import BookingDates from "../components/BookingDates";
-import ListingImg from "../components/ListingImg";
+import BookingDates from "../../components/booking/BookingDates";
+import ListingImg from "../../components/listing/ListingImg";
 
 
 export default function BookingsPage(){
@@ -18,7 +17,6 @@ export default function BookingsPage(){
 
     return (
         <div>
-            <AccountNav />
             <div>
                 {bookings && bookings.map((booking, index) => (
                     <Link to={`/account/bookings/${booking._id}`} key={index} className="flex gap-4 bg-gray-200 rounded-2xl overflow-hidden">

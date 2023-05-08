@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom"
-import AccountNav from "../components/AccountNav";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
-import ListingImg from "../components/ListingImg"
+import ListingImg from "../../components/listing/ListingImg"
 
 export default function ListingsPage(){
     const [listings, setListings] = useState([]);
@@ -15,7 +14,6 @@ export default function ListingsPage(){
     
     return (
         <div>
-            <AccountNav />
             <div className="text-center">
                     <Link to="/account/listings/new" className="inline-flex gap-1 bg-primary text-white py-2 px-4 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

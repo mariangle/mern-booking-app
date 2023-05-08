@@ -20,8 +20,8 @@ export default function IndexPage(){
                         )}
                     </div>
                     <div className="p-3">
-                        <h3 className="font-bold text-sm">{listing.title}</h3>
-                        <h2 className="text-sm truncate text-gray-500">{listing.address}</h2>
+                        <h3 className="font-bold text-sm">{listing.type} i {listing.city}</h3>
+                        <h2 className="text-sm truncate text-gray-500">{listing.title}</h2>
                         <div className="mt-1">
                             <span className="font-bold">{listing.price} DKK</span> per  nat
                         </div>

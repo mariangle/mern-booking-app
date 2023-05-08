@@ -124,14 +124,14 @@ app.post("/login", async (req, res) => {
     const { token } = req.cookies;
     const {
       title, city, type, rooms, address, images, description,
-      perks, extraInfo, checkIn, checkOut, maxGuests, price
+      perks, checkIn, checkOut, maxGuests, price
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
       const listingDoc = await Listing.create({
         user: userData.id,
         title, city, type, rooms, address, images, description,
-        perks, extraInfo, checkIn, checkOut, maxGuests, price
+        perks, checkIn, checkOut, maxGuests, price
       });
       res.json(listingDoc)
     });
@@ -153,7 +153,7 @@ app.post("/login", async (req, res) => {
     const { token } = req.cookies;
     const {
       id, title, city, type, rooms, address, images, description,
-      perks, extraInfo, checkIn, checkOut, maxGuests, price
+      perks, checkIn, checkOut, maxGuests, price
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
@@ -167,7 +167,7 @@ app.post("/login", async (req, res) => {
           listingDoc.set({
             user: userData.id,
             title, city, type, rooms, address, images, description,
-            perks, extraInfo, checkIn, checkOut, maxGuests, price
+            perks, checkIn, checkOut, maxGuests, price
           });
           await listingDoc.save();
           res.json("ok");

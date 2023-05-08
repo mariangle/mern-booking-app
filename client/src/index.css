@@ -5,6 +5,12 @@
   .max-w-small {
     max-width: 10rem;
   }
+  .ml-30 {
+    margin-left: 15rem;
+  }
+  .account-nav-width {
+    width: 15rem;
+  }
 }
 body {
   background: theme("colors.lightGrey");

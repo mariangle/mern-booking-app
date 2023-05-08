@@ -1,10 +1,8 @@
-import Perks from "../components/Perks";
-import ImageUploader from "../components/ImageUploader";
+import Perks from "../../components/listing/Perks";
+import ImageUploader from "../../components/listing/ImageUploader";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import AccountNav from "../components/AccountNav";
-
 
 export default function ListingFormPage(){
     const {id} = useParams();
@@ -17,11 +15,11 @@ export default function ListingFormPage(){
     const [images, setImages] = useState([]);
     const [description, setDescription] = useState("");
     const [perks, setPerks] = useState([]);
-    const [extraInfo, setExtraInfo] = useState("");
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
     const [maxGuests, setMaxGuests] = useState(1);
     const [price, setPrice] = useState(100);
+
 
     useEffect(() => {
       if (!id) {
@@ -39,7 +37,6 @@ export default function ListingFormPage(){
           setImages(data.images);
           setDescription(data.description);
           setPerks(data.perks);
-          setExtraInfo(data.extraInfo);
           setCheckIn(data.checkIn);
           setCheckOut(data.checkOut);
           setMaxGuests(data.maxGuests);
@@ -51,7 +48,7 @@ export default function ListingFormPage(){
         e.preventDefault();
         const listingData = {
           title, city, address, type, rooms, images, description,perks,
-            extraInfo, checkIn, checkOut, maxGuests, price
+            checkIn, checkOut, maxGuests, price
         };
       
         try {
@@ -74,7 +71,6 @@ export default function ListingFormPage(){
 
     return (
                 <div>
-                    <AccountNav />
                     <form onSubmit={handleSaveListing}>
                         <label>Kort Titel</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title"/>
@@ -96,8 +92,6 @@ export default function ListingFormPage(){
                         <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)}  placeholder="Description"/>
                         <label>Select perks</label>
                         <Perks selected={perks} onChange={setPerks}></Perks>
-                        <label htmlFor="">Extra Info</label>
-                        <textarea value={extraInfo} onChange={(e) => setExtraInfo(e.target.value)}/>
                         <div className="grid gap-2 grid-cols-2 md-grid-cols-4">
                             <div>
                                 <label htmlFor="">Check in time</label>

@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-import BookingWidget from "../components/BookingWidget";
-import ListingGallery from "../components/ListingGallery";
-import AddressLink from "../components/AddressLink";
+import BookingWidget from "../../components/booking/BookingWidget";
+import ListingGallery from "../../components/listing/ListingGallery";
+import AddressLink from "../../components/listing/AddressLink";
 
 export default function ListingPage(){
     const { id } = useParams();
@@ -25,7 +25,7 @@ export default function ListingPage(){
                 <div>
                     <div className="bg-white p-4 rounded-xl">
                         <h1 className="text-3xl">{listing.title}</h1>
-                        <AddressLink>{listing.address}</AddressLink>
+                        <AddressLink>{listing.address}, {listing.city}</AddressLink>
                         <ListingGallery listing={listing}/>
                         <div className="mt-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
                         <div>
@@ -36,15 +36,12 @@ export default function ListingPage(){
                                 Checkin:{listing.checkIn} <br />
                                 CheckOut: {listing.checkOut} <br />
                                 max number guests {listing.maxGuests}
+                                <div>
+                                    <h2 className="font-semibold text-l">Om stedet</h2>
+                                </div>
                             </div>
                             <div>
                                <BookingWidget listing={listing}></BookingWidget>
-                            </div>
-                            <div className="">
-                                <div>
-                                    <h2 className="font-semibold text-l">Extra Info</h2>
-                                    <div className="mb-4 mt-1 text-sm text-gray-700 leading-4">{listing.extraInfo}</div>
-                                </div>
                             </div>
                         </div>
                     </div>

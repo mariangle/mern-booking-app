@@ -11,7 +11,6 @@ const listingSchema = new Schema({
     images: { type: [String], required: true },
     description: { type: String, required: true },
     perks: { type: [String], required: true },
-    extraInfo: { type: String },
     checkIn: { type: String, required: true },
     checkOut: { type: String, required: true },
     maxGuests: { type: Number, required: true },
