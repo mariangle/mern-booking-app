@@ -14,9 +14,9 @@ export default function AccountLayout() {
 }
 
     return (
-      <div className="flex">
+      <div className="flex ">
         <div className="flex-shrink-0 bg-gray-200">
-          <div className="fixed left-0 h-full account-nav-width">
+          <div className="fixed left-0 top-0 h-full account-nav-width">
             <AccountNav />
           </div>
         </div>

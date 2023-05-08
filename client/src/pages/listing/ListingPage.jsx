@@ -22,22 +22,30 @@ export default function ListingPage(){
     return (
         <>
             {listing && (
-                <div>
-                    <div className="bg-white p-4 rounded-xl">
-                        <h1 className="text-3xl">{listing.title}</h1>
-                        <AddressLink>{listing.address}, {listing.city}</AddressLink>
+                <div className="inner">
+                    <div className="bg-white p-4 rounded-xl border">
+                        <div className="border px-4 py-6 rounded-md mb-4 custom-gradient">
+                            <h1 className="text-3xl font-semibold">{listing.title}</h1>
+                            <AddressLink>{listing.address}, {listing.city}</AddressLink>
+                        </div>
                         <ListingGallery listing={listing}/>
-                        <div className="mt-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
-                        <div>
-                                <div className="my-4">
-                                    <h2 className="font-semibold text-xl">Description</h2>
+                        <div className="mt-4 flex gap-4">
+                            <div>
+                            <div className="border p-4 rounded-md mb-4">
+                                    <h2 className="font-semibold text-xl">Om Stedet</h2>
                                     {listing.description}
                                 </div>
-                                Checkin:{listing.checkIn} <br />
-                                CheckOut: {listing.checkOut} <br />
-                                max number guests {listing.maxGuests}
-                                <div>
-                                    <h2 className="font-semibold text-l">Om stedet</h2>
+                                <div className="border p-4 rounded-md mb-4">
+                                    <h2 className="font-semibold text-xl">Det skal du vide</h2>
+                                        <div className="grid grid-cols-3">
+                                            <div> Indtjekning: {listing.checkIn}</div>
+                                            <div> Udtjekning: {listing.checkOut}</div>
+                                            <div> Max gæster: {listing.maxGuests}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="border p-4 rounded-md mb-4">
+                                    <h2 className="font-semibold text-xl">Det tilbyder denne bolig</h2>
                                 </div>
                             </div>
                             <div>

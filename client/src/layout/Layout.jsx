@@ -5,7 +5,7 @@ export default function Layout(){
     return (
         <div>
             <Header />
-            <div>
+            <div className="py-20">
                 <Outlet />
             </div>
         </div>

@@ -13,29 +13,33 @@ export default function ListingsPage(){
     }, [])
     
     return (
-        <div>
-            <div className="text-center">
-                    <Link to="/account/listings/new" className="inline-flex gap-1 bg-primary text-white py-2 px-4 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        Add new listing
+            <div>
+                <ul className="mx-4 mt-4 mb-2">
+                    <li>
+                        <Link to="/account/listings/new" className="inline-flex gap-1 text-sm items-center text-primary font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p>Opret Nyt Opslag</p>
+                        </Link>
+                    </li>
+                </ul>
+                <div>
+                </div>
+                <div className="mx-4">
+                    {listings.length > 0 && listings.map((listing) => (
+                    <Link to={"/account/listings/" + listing._id} key={listing._id} className="cursor-pointer flex gap-4 border bg-white rounded-xl mb-2">
+                        <div className="max-w-small">
+                            <ListingImg listing={listing} />
+                        </div>
+                        <div className="flex flex-col p-4 grow">
+                            <h2 className="text-xl font-semibold">{listing.type} i {listing.city}</h2>
+                            <p className="text-sm overflow-hidden overflow-ellipsis">{listing.description}</p>
+                        </div>
                     </Link>
+                    ))}
                 </div>
-                <div className="mt-4">
-                {listings.length > 0 && listings.map((listing) => (
-                <Link to={"/account/listings/" + listing._id} key={listing._id} className="cursor-pointer flex gap-4 bg-gray-100 mt-4 p-4 rounded-l">
-                    <div className="bg-gray-300 aspect-square flex max-w-small">
-                        <ListingImg listing={listing} />
-                    </div>
-                    <div className="flex flex-col">
-                        <h2 className="text-xl">{listing.title}</h2>
-                        <p className="text-sm mt-2 overflow-hidden overflow-ellipsis">{listing.description}</p>
-                    </div>
-                </Link>
-                ))}
-                </div>
-        </div>
+            </div>
     )
 
 }

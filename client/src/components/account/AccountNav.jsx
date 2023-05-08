@@ -14,23 +14,23 @@ export default function AccountNav(){
     }
 
     function linkClasses (type=null) {
-      let classes = 'flex py-2 px-8 gap-2 text-white ';
+      let classes = 'flex py-2 px-8 gap-2 text-white hover:bg-primary ';
       if (type === subpage) {
-        classes += 'bg-darkPrimary';
+        classes += 'bg-lightGrad';
       }
       return classes;
     }
 
     return (
-    <nav className=" left-0 h-full flex flex-col justify-between bg-primary z-50">
+    <nav className="left-0 top-0 h-full flex flex-col justify-between custom-gradient">
       <div>
-        <div className="flex flex-col my-6 items-center gap-2">
-          <div className="p-2 rounded-full bg-white mt-20 ">
-            <UserIcon size={50}></UserIcon>
+        <div className="flex flex-col items-center gap-2 mt-10">
+          <div className="p-4 rounded-full bg-lightGrad mt-20 ">
+            <UserIcon size={35} color={"white"}></UserIcon>
           </div>
           <p className="text-white font-semibold">{user?.name}</p>
         </div>
-        <ul className="py-6 border-t">
+        <ul className="py-6">
           <Link to="/account">
             <div className={linkClasses("profile")}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -53,7 +53,7 @@ export default function AccountNav(){
           </Link>
         </ul>
         <div className="w-full p-8">
-          <button className="bg-darkPrimary w-full text-white p-2 rounded-xl text-center" onClick={logout}>
+          <button className="bg-lightGrad w-full text-white p-2 rounded-xl text-center" onClick={logout}>
               Log Ud
           </button>
       </div>

@@ -70,51 +70,52 @@ export default function ListingFormPage(){
       }
 
     return (
-                <div>
+                <div className="m-4 p-4 border rounded-md max-w-screen-md">
+                    <h1 className="text-2xl font-semibold pb-4 border-b">{ id ? "Rediger Opslag" : "Opret Opslag"}</h1>
                     <form onSubmit={handleSaveListing}>
-                        <label>Kort Titel</label>
-                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title"/>
-                        <label>Addresse</label>
+                        <label className="font-semibold inline-block mt-4 mb-2">Titel</label>
+                        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Giv en kort titel"/>
+                        <label className="font-semibold inline-block my-2">By</label>
+                        <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="Navn på by"/>
+                        <label className="font-semibold inline-block my-2">Addresse</label>
                         <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address"/>
-                        <label>By</label>
-                        <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City"/>
-                        <label>Boligtype</label>
+                        <label className="font-semibold inline-block my-2">Boligtype</label>
                         <select value={type} onChange={(e) => setType(e.target.value)}>
-                          <option value="">Select type</option>
+                          <option value="">Vælg boligtype</option>
                           <option value="Værelse">Værelse</option>
                           <option value="Lejlighed">Lejlighed</option>
                           <option value="Gæstehus">Gæstehus</option>
                           <option value="Minihus">Minihus</option>
                         </select>
-                        <label>Images</label>
+                        <label className="font-semibold inline-block my-2">Billeder</label>
                         <ImageUploader images={images} onChange={setImages} />
-                        <label>Description</label>
-                        <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)}  placeholder="Description"/>
-                        <label>Select perks</label>
+                        <label className="font-semibold inline-block my-2">Beskrivelse</label>
+                        <textarea type="text" value={description} onChange={(e) => setDescription(e.target.value)}  placeholder="Giv en beskrivelse af din bolig"/>
+                        <label className="font-semibold inline-block my-2">Fordele</label>
                         <Perks selected={perks} onChange={setPerks}></Perks>
-                        <div className="grid gap-2 grid-cols-2 md-grid-cols-4">
+                        <div className="grid gap-2 grid-cols-4 md-grid-cols-6 my-4">
                             <div>
-                                <label htmlFor="">Check in time</label>
+                                <label className="font-semibold mb-2 inline-block">Indtjekning</label>
                                 <input type="time" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} placeholder="14:00"/>
                             </div>
                             <div>
-                                <label htmlFor="">Check out time</label>
+                                <label className="font-semibold mb-2 inline-block">Udtjekning</label>
                                 <input type="time" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} placeholder="11"/>
                             </div>
                             <div>
-                                <label htmlFor="">Max gæster</label>
+                                <label className="font-semibold mb-2 inline-block">Max gæster</label>
                                 <input type="number" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)}/>
                             </div>
                             <div>
-                                <label htmlFor="">Price pr. Night</label>
+                                <label className="font-semibold mb-2 inline-block">Price pr. nat</label>
                                 <input type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
                             </div>
                             <div>
-                                <label htmlFor="">Antal rum</label>
+                                <label className="font-semibold mb-2 inline-block">Antal rum</label>
                                 <input type="number" value={rooms} onChange={(e) => setRooms(e.target.value)}/>
                             </div>
                         </div>
-                        <button className="primary my-4">Save</button>
+                        <button className="primary my-4">{id ? "Gem" : "Tilføj"}</button>
                     </form>
                 </div>
     )

@@ -1,7 +1,7 @@
 export default function ListingImg({ listing, index = 0, className = null }) {
   if (listing && listing.images?.length) {
     if (!className) {
-      className = "w-full h-full object-cover";
+      className = "w-full h-full object-cover aspect-square";
     }
 
     return (

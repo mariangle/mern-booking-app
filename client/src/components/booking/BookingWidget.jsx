@@ -35,21 +35,21 @@ export default function BookingWidget({listing}){
     }
 
     return (
-        <div className="bg-white shadow p-4 rounded-2xl">
-            <div className="text-2xl">
-                <span className="font-semibold">{listing.price} DKK</span> nat
+        <div className="bg-white border p-4 rounded-md">
+            <div>
+                <span className="font-semibold text-lg">{listing.price} DKK</span> nat
             </div>
-            <div className="border rounded-2xl mt-4">
+            <div className="border rounded-md mt-2">
                 <div className="flex">
                     <div className="py-3 px-4">
-                        <label>INDTJEKNING</label>
+                        <label className="text-xs">INDTJEKNING</label>
                         <input type="date"
                             value={checkIn}
                             onChange={e => setCheckIn(e.target.value)}
                             />
                     </div>
                     <div className="py-3 px-4 border-l">
-                        <label>UDTJEKNING</label>
+                        <label className="text-xs">UDTJEKNING</label>
                         <input type="date" 
                             value={checkOut}
                             onChange={e => setCheckOut(e.target.value)}
@@ -57,20 +57,22 @@ export default function BookingWidget({listing}){
                     </div>
                 </div>
                 <div className="py-3 px-4 border-t">
-                <label>GÆSTER</label>
+                <label className="text-xs">GÆSTER</label>
                 <input type="number"
                         value={numberOfGuests}
                         onChange={e => setNumbeOfGuests(e.target.value)}
+                        min="1"
+                        max={listing.maxGuests}
                         />
                 </div>
                 {numberOfNights > 0 && (
                     <div className="py-3 px-4 border-t">
-                        <label>FULDE NAVN</label>
+                        <label className="text-xs">FULDE NAVN</label>
                         <input type="text"
                             value={name}
                             onChange={e => setName(e.target.value)}                        
                             />
-                        <label>TELEFONNUMMER</label>
+                        <label className="text-xs">TELEFONNUMMER</label>
                         <input type="tel"
                             value={phone}
                             onChange={e => setPhone(e.target.value)}
@@ -78,7 +80,7 @@ export default function BookingWidget({listing}){
                     </div>
                 ) }
             </div>
-            <button onClick={handleBook} className="primary mt-4">
+            <button onClick={handleBook} className="custom-gradient mt-4 py-2 rounded-md">
                 Reserver
             </button>
             {checkIn && checkOut && (

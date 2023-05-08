@@ -11,9 +11,17 @@
   .account-nav-width {
     width: 15rem;
   }
+  .custom-gradient {
+    background: linear-gradient(
+      110deg,
+      theme("colors.lightGrad"),
+      theme("colors.darkGrad")
+    );
+    @apply text-white w-full;
+  }
 }
 body {
-  background: theme("colors.lightGrey");
+  font-family: "Poppins", sans-serif;
 }
 
 input[type="text"],
@@ -21,20 +29,31 @@ input[type="password"],
 input[type="email"],
 input[type="number"],
 input[type="tel"],
+input[type="time"],
 textarea,
 select {
-  @apply w-full border my-1 py-2 px-3 rounded-2xl;
+  @apply w-full border py-2 px-3 rounded-md;
 }
 textarea {
   height: 140px;
 }
 button {
-  @apply bg-gray-300;
+  @apply bg-lightPrimary text-white px-2;
 }
 button.primary {
-  background-color: #f5385d;
-  @apply bg-primary p-2 w-full text-white rounded-2xl;
+  @apply bg-primary p-2 w-full text-white rounded-md;
 }
 button.transparent {
-  @apply absolute text-white bg-black p-2 bg-opacity-50 rounded-2xl;
+  @apply absolute text-white bg-black p-2 bg-opacity-50 rounded-md;
+}
+div.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0.5rem;
+}
+div.outer {
+}
+div.min-size {
+  min-height: 10rem;
+  min-width: 10rem;
 }
