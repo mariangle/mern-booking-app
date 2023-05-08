@@ -1,4 +1,4 @@
-import Perks from "../Perks";
+import Perks from "../components/Perks";
 import ImageUploader from "../components/ImageUploader";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -60,10 +60,15 @@ export default function ListingFormPage(){
           } else {
             await axios.post("/listings", listingData);
           }
-      
+        
           navigate("/account/listings");
         } catch (error) {
-          console.error(error);
+          if (error.response?.data?.error) {
+            const errorMessage = error.response.data.error;
+            alert(errorMessage);
+          } else {
+            alert(error);
+          }
         }
       }
 
@@ -78,7 +83,13 @@ export default function ListingFormPage(){
                         <label>By</label>
                         <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City"/>
                         <label>Boligtype</label>
-                        <input type="text" value={type} onChange={(e) => setType(e.target.value)} placeholder="Lejlighed"/>
+                        <select value={type} onChange={(e) => setType(e.target.value)}>
+                          <option value="">Select type</option>
+                          <option value="Værelse">Værelse</option>
+                          <option value="Lejlighed">Lejlighed</option>
+                          <option value="Gæstehus">Gæstehus</option>
+                          <option value="Minihus">Minihus</option>
+                        </select>
                         <label>Images</label>
                         <ImageUploader images={images} onChange={setImages} />
                         <label>Description</label>
@@ -97,7 +108,7 @@ export default function ListingFormPage(){
                                 <input type="time" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} placeholder="11"/>
                             </div>
                             <div>
-                                <label htmlFor="">Max guests</label>
+                                <label htmlFor="">Max gæster</label>
                                 <input type="number" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)}/>
                             </div>
                             <div>
@@ -105,7 +116,7 @@ export default function ListingFormPage(){
                                 <input type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
                             </div>
                             <div>
-                                <label htmlFor="">Room number</label>
+                                <label htmlFor="">Antal rum</label>
                                 <input type="number" value={rooms} onChange={(e) => setRooms(e.target.value)}/>
                             </div>
                         </div>

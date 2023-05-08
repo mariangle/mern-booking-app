@@ -158,17 +158,24 @@ app.post("/login", async (req, res) => {
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
       const listingDoc = await Listing.findById(id);
-      if (userData.id === listingDoc.user.toString()){
-        listingDoc.set({
-          user: userData.id,
-          title, city, type, rooms, address, images, description,
-          perks, extraInfo, checkIn, checkOut, maxGuests, price
-        })
-        await listingDoc.save();
-        res.json("ok")
+      if (userData.id === listingDoc.user.toString()) {
+        const requiredFields = [title, city, type, rooms, address, images, description,
+          perks, checkIn, checkOut, maxGuests, price];
+        if (requiredFields.some(field => !field)) {
+          res.status(400).json({ error: "Required fields are missing" });
+        } else {
+          listingDoc.set({
+            user: userData.id,
+            title, city, type, rooms, address, images, description,
+            perks, extraInfo, checkIn, checkOut, maxGuests, price
+          });
+          await listingDoc.save();
+          res.json("ok");
+        }
       }
-    })
-  })
+    });
+  });
+  
 
   app.get("/listings", async (req, res) => {
     res.json( await Listing.find());
