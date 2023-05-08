@@ -26,7 +26,7 @@ export default function ListingsPage(){
                 </div>
                 <div className="mt-4">
                 {listings.length > 0 && listings.map((listing) => (
-                <Link to={"/account/listings/" + listing._id} key={listing._id} className="cursor-pointer flex gap-4 bg-gray-100 mt-4 p-4 rounded-2xl">
+                <Link to={"/account/listings/" + listing._id} key={listing._id} className="cursor-pointer flex gap-4 bg-gray-100 mt-4 p-4 rounded-l">
                     <div className="bg-gray-300 aspect-square flex max-w-small">
                         <ListingImg listing={listing} />
                     </div>

@@ -10,6 +10,9 @@ export default function ListingFormPage(){
     const {id} = useParams();
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
+    const [city, setCity] = useState("");
+    const [rooms, setRooms] = useState(1);
+    const [type, setType] = useState("");
     const [address, setAddress] = useState("");
     const [images, setImages] = useState([]);
     const [description, setDescription] = useState("");
@@ -29,6 +32,9 @@ export default function ListingFormPage(){
         .then(response => {
           const { data } = response;
           setTitle(data.title);
+          setCity(data.city);
+          setType(data.type);
+          setRooms(data.rooms);
           setAddress(data.address);
           setImages(data.images);
           setDescription(data.description);
@@ -44,7 +50,7 @@ export default function ListingFormPage(){
     async function handleSaveListing(e) {
         e.preventDefault();
         const listingData = {
-          title, address, images,description,perks,
+          title, city, address, type, rooms, images, description,perks,
             extraInfo, checkIn, checkOut, maxGuests, price
         };
       
@@ -65,10 +71,14 @@ export default function ListingFormPage(){
                 <div>
                     <AccountNav />
                     <form onSubmit={handleSaveListing}>
-                        <label>Title</label>
+                        <label>Kort Titel</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title"/>
-                        <label>Address</label>
+                        <label>Addresse</label>
                         <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address"/>
+                        <label>By</label>
+                        <input type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="City"/>
+                        <label>Boligtype</label>
+                        <input type="text" value={type} onChange={(e) => setType(e.target.value)} placeholder="Lejlighed"/>
                         <label>Images</label>
                         <ImageUploader images={images} onChange={setImages} />
                         <label>Description</label>
@@ -93,6 +103,10 @@ export default function ListingFormPage(){
                             <div>
                                 <label htmlFor="">Price pr. Night</label>
                                 <input type="number" value={price} onChange={(e) => setPrice(e.target.value)}/>
+                            </div>
+                            <div>
+                                <label htmlFor="">Room number</label>
+                                <input type="number" value={rooms} onChange={(e) => setRooms(e.target.value)}/>
                             </div>
                         </div>
                         <button className="primary my-4">Save</button>

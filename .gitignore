@@ -2,5 +2,8 @@
 /api/node_modules
 /client/node_modules
 
+# uploads
+/api/uploads
+
 # text
 *.txt

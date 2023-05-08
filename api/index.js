@@ -122,15 +122,15 @@ app.post("/login", async (req, res) => {
 
   app.post("/listings", (req, res) => {
     const { token } = req.cookies;
-    const { 
-      title, address, images, description,
+    const {
+      title, city, type, rooms, address, images, description,
       perks, extraInfo, checkIn, checkOut, maxGuests, price
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
       const listingDoc = await Listing.create({
-        owner: userData.id,
-        title, address, images, description,
+        user: userData.id,
+        title, city, type, rooms, address, images, description,
         perks, extraInfo, checkIn, checkOut, maxGuests, price
       });
       res.json(listingDoc)
@@ -141,27 +141,27 @@ app.post("/login", async (req, res) => {
     const { token } = req.cookies;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       const { id } = userData;
-      res.json( await Listing.find({owner:id}));
+      res.json( await Listing.find({user:id}));
     })
   })
     
   app.get("/listings/:id", async (req, res) => {
-    const { id } = req.params;
-    res.json(await Listing.findById(id).populate("owner"))
-  })
+    res.json(await Listing.findById(req.params.id))
+  });
 
   app.put("/listings", async (req, res) => {
     const { token } = req.cookies;
-    const { 
-      id, title, address, images, description,
+    const {
+      id, title, city, type, rooms, address, images, description,
       perks, extraInfo, checkIn, checkOut, maxGuests, price
     } = req.body;
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
       if (err) throw err;
       const listingDoc = await Listing.findById(id);
-      if (userData.id === listingDoc.owner.toString()){
+      if (userData.id === listingDoc.user.toString()){
         listingDoc.set({
-          title, address, images, description,
+          user: userData.id,
+          title, city, type, rooms, address, images, description,
           perks, extraInfo, checkIn, checkOut, maxGuests, price
         })
         await listingDoc.save();
@@ -197,6 +197,7 @@ app.post("/login", async (req, res) => {
     const userData = await getUserDataFromReq(req);
     res.json( await Booking.find({user:userData.id}).populate("listing"))
   })
+
 
   
 app.listen(4000);

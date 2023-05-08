@@ -6,6 +6,9 @@
     max-width: 10rem;
   }
 }
+body {
+  background: theme("colors.lightGrey");
+}
 
 input[type="text"],
 input[type="password"],
@@ -24,4 +27,7 @@ button {
 button.primary {
   background-color: #f5385d;
   @apply bg-primary p-2 w-full text-white rounded-2xl;
+}
+button.transparent {
+  @apply absolute text-white bg-black p-2 bg-opacity-50 rounded-2xl;
 }

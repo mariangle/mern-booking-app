@@ -9,19 +9,22 @@ export default function IndexPage(){
             setListings(response.data);
         })
     }, [])
+
     return (
-        <div className="grid gap-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8">
+        <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8">
             {listings.length > 0 && listings.map((listing, index ) => (
-                <Link to={"/listing/"+listing._id} key={index}>
-                    <div className="bg-gray-500 mb-2 rounded-2xl flex">
+                <Link to={"/listing/"+listing._id} key={index} className="bg-white border rounded-l">
+                    <div className="flex">
                         {listing.images?.[0] && (
-                            <img className="rounded-2xl object-cover aspect-square" src={"http://localhost:4000/uploads/" + listing.images?.[0]} alt="" />
+                            <img className="rounded-l object-cover aspect-square" src={"http://localhost:4000/uploads/" + listing.images?.[0]} alt="" />
                         )}
                     </div>
-                    <h3 className="font-bold">{listing.title}</h3>
-                    <h2 className="text-sm truncate text-gray-500">{listing.address}</h2>
-                    <div className="mt-1">
-                        <span className="font-bold">{listing.price} DKK</span> per  nat
+                    <div className="p-3">
+                        <h3 className="font-bold text-sm">{listing.title}</h3>
+                        <h2 className="text-sm truncate text-gray-500">{listing.address}</h2>
+                        <div className="mt-1">
+                            <span className="font-bold">{listing.price} DKK</span> per  nat
+                        </div>
                     </div>
                 </Link>
             ))}

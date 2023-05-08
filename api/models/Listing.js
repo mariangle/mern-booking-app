@@ -2,9 +2,12 @@ const { default: mongoose } = require("mongoose");
 const { Schema } = mongoose;
 
 const listingSchema = new Schema({
-    owner: { type:Schema.Types.ObjectId, ref: "User" },
+    user: { type: Schema.Types.ObjectId, ref: "User" },
     title: String,
+    city: String,
     address: String,
+    rooms: Number,
+    type: String,
     images: [String],
     description: String,
     perks: [String],
@@ -13,7 +16,8 @@ const listingSchema = new Schema({
     checkOut: String,
     maxGuests: Number,
     price: Number
-})
+});
+
 
 const ListingModel = mongoose.model("Listing", listingSchema);
 
