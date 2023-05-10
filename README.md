@@ -24,13 +24,19 @@ In addition to the MERN stack, the project also incorporates:
 
 **Book a Listing:**
 
-https://github.com/mariangle/mern-booking-app/assets/124585244/18b95a4c-7983-4925-9caa-fc82e5f80bcb
+
+
+https://github.com/mariangle/mern-booking-app/assets/124585244/97b1301a-3901-4890-82fb-f6d1efa28977
+
 
 ---
 
 **Manage Listings:**
 
-https://github.com/mariangle/mern-booking-app/assets/124585244/6568a3da-ff2f-4493-a1e8-1060c5c89620
+
+
+https://github.com/mariangle/mern-booking-app/assets/124585244/c9ad2ac8-3b9d-4414-b675-ccebd64148a6
+
 
 
 # Conclusion
