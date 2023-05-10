@@ -47,7 +47,7 @@ button.transparent {
   @apply absolute text-white bg-black p-2 bg-opacity-50 rounded-md;
 }
 div.inner {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 0.5rem;
 }

@@ -25,10 +25,10 @@ export default function BookingPage(){
     }
 
     return (
-        <div className="my-8">
+        <div className="p-4 max-w-screen-lg">
             <h1 className="text-3xl">{booking.listing.title}</h1>
-            <AddressLink className="my-2 block">{booking.listing.address}</AddressLink>
-            <div className="bg-gray-200 p-6 py-6 mb-4 rounded-2xl flex items-center justify-between">
+            <AddressLink className="my-2 block">{booking.listing.address}, {booking.listing.city}</AddressLink>
+            <div className="border p-6 py-6 mb-4 rounded-md flex items-center justify-between">
                 <div>
                     <h2 className="text-2xl mb-4">Your booking info</h2>
                     <BookingDates booking={booking}></BookingDates>

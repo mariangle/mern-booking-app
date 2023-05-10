@@ -6,7 +6,7 @@ export default function IndexPage(){
     const [ listings, setListings] = useState([]);
     useEffect(() => {
         axios.get("/listings").then(response => {
-            setListings([...response.data, ...response.data]);
+            setListings([...response.data]);
         })
     }, [])
 

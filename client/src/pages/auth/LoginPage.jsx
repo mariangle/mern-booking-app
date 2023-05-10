@@ -35,10 +35,12 @@ export default function LoginPage(){
                 <h1 className="text-4xl text-center mb-4">Login</h1>
                 <form className="max-w-md mx-auto" onSubmit={loginUser}>
                     <input type="email" 
+                    className="mb-2"
                     placeholder="Your@email.com" 
                     value={email} 
                     onChange={(e) => setEmail(e.target.value)}/>
                     <input type="password" 
+                    className="mb-2"
                     placeholder="Password" 
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)}/>

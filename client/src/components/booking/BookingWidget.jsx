@@ -35,7 +35,7 @@ export default function BookingWidget({listing}){
     }
 
     return (
-        <div className="bg-white border p-4 rounded-md">
+        <div className="bg-white border p-4 mt-10 rounded-md shadow-lg max-w-md">
             <div>
                 <span className="font-semibold text-lg">{listing.price} DKK</span> nat
             </div>
@@ -80,7 +80,7 @@ export default function BookingWidget({listing}){
                     </div>
                 ) }
             </div>
-            <button onClick={handleBook} className="custom-gradient mt-4 py-2 rounded-md">
+            <button onClick={handleBook} className="bg-primary w-full mt-4 py-2 rounded-md">
                 Reserver
             </button>
             {checkIn && checkOut && (

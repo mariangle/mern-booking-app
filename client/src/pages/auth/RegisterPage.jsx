@@ -26,9 +26,9 @@ export default function RegisterPage(){
             <div className="mb-40">
                 <h1 className="text-4xl text-center mb-4">Register</h1>
                 <form className="max-w-md mx-auto" onSubmit={registerUser}>
-                    <input type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)}/>
-                    <input type="email" placeholder="Your@email.com"  value={email} onChange={(e) => setEmail(e.target.value)}/>
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="text" placeholder="John Doe" className="mb-2" value={name} onChange={(e) => setName(e.target.value)}/>
+                    <input type="email" placeholder="Your@email.com"  className="mb-2" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="password" placeholder="Password"  className="mb-2" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <button className="primary">Register</button>
                 </form>
                 <div className="py-2 text-gray-500">Already a member? <Link className="underline text-bl" to={"/login"}>Login</Link></div>
